@@ -19,7 +19,7 @@ try {
     # remove-item fully deletes an item. It does not send
     # deleted items to the recycle bin.
     # Maybe later add a flag to fully delete
-    remove-item -path $directory -recurse -ErrorAction Stop
+    remove-item -path $directory -recurse -force -ErrorAction Stop
 
     # Remove item to recycle bin.
     # $item = get-item -path directory

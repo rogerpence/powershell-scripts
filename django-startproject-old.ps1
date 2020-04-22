@@ -31,11 +31,9 @@ $target = $args[0]                            # Capture target folder name.
 #new-item $target -itemtype directory         # Create target folder.
 #set-location -path $target                   # Move to that folder.
 
-mkdir $target
+python -m venv $target                        # Create the Python virtual environment 
 set-location -path $target                    # Move to that folder.
-
-python -m venv env                            # Create the Python virtual environment
-env\scripts\activate                              # Activate python virtual environment.
+scripts\activate                              # Activate python virtual environment.
 
 pip install django                            # Install django locally.
 pip install psycopg2                          # Install posgresql driver locally.
