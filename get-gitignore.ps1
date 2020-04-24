@@ -1,2 +1,2 @@
-invoke-webrequest -Uri "https://gist.githubusercontent.com/rogerpence/fd40c65d7fe602f74eaeaaf72b8e276e/raw/e257bc63602fc9161c1141a749fd5149218f1a87/.gitignore" -Outfile .\.gitignore
+invoke-webrequest -Uri "https://gist.githubusercontent.com/rogerpence/fd40c65d7fe602f74eaeaaf72b8e276e/raw/4f67669d07f5b1ee90ba857ae7ce157a921e020f/.gitignore" -Outfile .\.gitignore
 write-host .gitignore added

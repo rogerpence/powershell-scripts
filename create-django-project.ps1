@@ -1,3 +1,17 @@
+[CmdletBinding()]
+param (
+    [parameter(mandatory=$true,
+               helpmessage="Project and folder name.")
+    ]
+    [string]$projectname
+)
+
+if (Test-Path $projectname) {
+    write-host "$projectname directory already exists." -backgroundcolor red -foregroundcolor white
+    exit
+}
+# write-host Creating Django projec at: $projectname
+
 # Start a new Django project
 # -----------------------------------
 # django-startproject <project-name>
@@ -21,42 +35,42 @@
 #
 
 write-host
-write-host Creating a new Django project
+write-host Creating a new Django project: $projectname
 write-host -------------------------------------------------------------------- -ForegroundColor black -BackgroundColor yellow
 write-host You many need to refresh your browser after the Django server starts -ForegroundColor black -BackgroundColor yellow
 write-host -------------------------------------------------------------------- -ForegroundColor black -BackgroundColor yellow
 write-host
+write-host "Installing Django and other stuff. This may take a minute or two.." -foregroundcolor green
 
-$target = $args[0]                            # Capture target folder name.
-#new-item $target -itemtype directory         # Create target folder.
-#set-location -path $target                   # Move to that folder.
+#new-item $projectname -itemtype directory         # Create target folder.
+#set-location -path $projectname                   # Move to that folder.
 
-mkdir $target
-set-location -path $target                    # Move to that folder.
+                                                   # Create new folder.
+new-item -path . -name $projectname -itemtype "directory" | out-null
+set-location -path $projectname                    # Move to that folder.
 
 python -m venv env                            # Create the Python virtual environment
 env\scripts\activate                          # Activate python virtual environment.
+                                             # Upgrade utilities.
 
-                                              # Upgrade utilities.
 env\scripts\python -m pip install --upgrade pip setuptools wheel
 
 pip install django                            # Install django locally.
 pip install psycopg2                          # Install posgresql driver locally.
 
-pip freeze > requirements.text
+pip freeze > requirements.txt
 
 django-admin startproject core                # Start a new project named core.
 
 rename-item core root                         # Rename project root to `root`
 
-set-location -path root
-npm init -y
+npm init -y | out-null
 
-echo env > .gitignore
-echo __pycache__/ >> .gitignore
+invoke-webrequest -Uri "https://gist.githubusercontent.com/rogerpence/fd40c65d7fe602f74eaeaaf72b8e276e/raw/4f67669d07f5b1ee90ba857ae7ce157a921e020f/.gitignore" -Outfile .\.gitignore
+
+# echo env > .gitignore
+# echo __pycache__/ >> .gitignore
 git init
-
-code .                                        # Open Code over the project.
 
 start-process firefox http://localhost:5000   # Start firefox
 
@@ -66,9 +80,11 @@ write-host You many need to refresh your browser after the Django server starts 
 write-host -------------------------------------------------------------------- -ForegroundColor black -BackgroundColor yellow
 write-host
 
+code .                                        # Open Code over the project.
+
+set-location -path root
+
+write-host "You may see an error that says: An established connection was aborted... " -foregroundcolor green
+write-host "This is a known problem with Django's server. Refresh your dev browser when you see that message." -foregroundcolor green
+
 python manage.py runserver 5000               # Start Django server.
-
-
-
-
-# write-host $pwd -ForegroundColor white -BackgroundColor red
