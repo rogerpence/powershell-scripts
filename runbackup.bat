@@ -1,0 +1,2 @@
+python runbackup.py
+pause
