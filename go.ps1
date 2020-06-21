@@ -16,6 +16,16 @@ function change_directory() {
 
 
 switch($target_directory) {
+    'backup' {
+        set-location c:\users\thumb\documents\utilities\backup
+        ./backup
+        write-host Backup complete. -backgroundcolor green -foregroundcolor black
+        exit
+    }
+    'articles' {
+        change_directory($($base + 'articles'))
+        exit
+    }
     'utilities' {
         change_directory($($base + 'utilities'))
         exit

@@ -22,7 +22,7 @@ if (Test-Path $projectname) {
 #
 # This script installs the Python 'psycopg2'
 # Postgresql driver. It's also opinionated
-# how how it names Django folders.
+# in how how it names Django folders.
 # The top-level folder is always 'root'
 # and Django's bootstrap app is always 'core'.
 #

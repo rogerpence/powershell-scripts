@@ -28,6 +28,10 @@ else {
     exit
 }
 
+if (test-path project) {
+    set-location project
+}
+
 # If the -nocode arg is absent, launch VS Code.
 if (-not $nocode) {
     code .

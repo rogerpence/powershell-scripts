@@ -16,5 +16,11 @@ if ($args[0] -eq 'runserver') {
     }
 }
 
-write-host Running python project\manage.py $args -foregroundcolor blue -backgroundcolor white
-python project\manage.py $args
+# if (-Not (test-path -path 'manage.py')) {
+#     set-location project
+# }
+
+# write-host Running python project\manage.py $args -foregroundcolor blue -backgroundcolor white
+# python project\manage.py $args
+write-host Running python manage.py $args -foregroundcolor blue -backgroundcolor white
+python manage.py $args
