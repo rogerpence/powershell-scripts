@@ -65,13 +65,15 @@ django-admin startproject core                # Start a new project named core.
 
 rename-item core project                      # Rename project outer 'core' folder to 'project'.
 
-npm init -y | out-null                        # Create package.json and customize it.
-python C:\Users\thumb\Documents\utilities\edit-pkg-json.py
-
-                                              # Get .gitignore file.
+# Get .gitignore file.
 invoke-webrequest -Uri "https://gist.githubusercontent.com/rogerpence/fd40c65d7fe602f74eaeaaf72b8e276e/raw/4f67669d07f5b1ee90ba857ae7ce157a921e020f/.gitignore" -Outfile .\.gitignore
 
 git init                                      #  Initialize git
+
+set-location project
+
+npm init -y | out-null                        # Create package.json and customize it.
+python C:\Users\thumb\Documents\utilities\customize-package-json.py
 
 start-process firefox http://localhost:5000   # Start firefox
 
@@ -86,4 +88,4 @@ code .                                        # Open Code over the project.
 write-host "You may see an error that says: An established connection was aborted... " -foregroundcolor green
 write-host "This is a known problem with Django's server. Refresh your dev browser when you see that message." -foregroundcolor green
 
-python project\manage.py runserver 5000       # Start Django server.
+python manage.py runserver 5000       # Start Django server.

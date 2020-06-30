@@ -18,7 +18,7 @@ if (-Not (test-path -path $directory)) {
 try {
     # remove-item fully deletes an item. It does not send
     # deleted items to the recycle bin.
-    # Maybe later add a flag to fully delete
+    # Maybe later add a flag to toggle hard versus soft delete.
     remove-item -path $directory -recurse -force -ErrorAction Stop
 
     # Remove item to recycle bin.

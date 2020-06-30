@@ -1,0 +1,1 @@
+python C:\Users\thumb\Documents\utilities\tree.py $args
