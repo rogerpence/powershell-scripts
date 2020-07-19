@@ -6,5 +6,6 @@
 #  /panel=L   Make left panel active
 #
 $lpath = pwd
-start-process "C:\Program Files (x86)\FreeCommander XE\FreeCommander.exe" -argumentlist  "/c /l=$($lpath) /panel=L /t"
+$rpath = "C:\Users\thumb\Documents\programming\"
+start-process "C:\Program Files (x86)\FreeCommander XE\FreeCommander.exe" -argumentlist  "/c /l=$($lpath) /r=$($rpath) /panel=L /t"
 

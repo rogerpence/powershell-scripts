@@ -14,12 +14,10 @@ function change_directory() {
     }
 }
 
-
 switch($target_directory) {
     'backup' {
         set-location c:\users\thumb\documents\utilities\backup
-        ./backup
-        write-host Backup complete. -backgroundcolor green -foregroundcolor black
+        ls run-*.ps1
         exit
     }
     'articles' {
