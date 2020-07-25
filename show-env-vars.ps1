@@ -6,24 +6,23 @@ param (
     [switch] $eq = $false
 )
 
-
 $vars = get-childItem Env:
 $noResults = $true
 foreach ($var in $vars) {
     if ($startingChar -eq '') {
+        $noResults = $false
         write-host $var.name = $var.value
     }
     else {
         if ($eq) {
-            if ($var.name.ToLower() -eq $startingChar) {
+            if ($var.name.ToLower() -eq $startingChar.ToLower()) {
                 $noResults = $false
                 write-host $var.name = $var.value
                 return $var.value
             }
         }
         else {
-            # if ($var.name.substring(0,1).ToLower() -eq $startingChar) {
-            if ($var.name.ToLower().startswith($startingChar)) {
+            if ($var.name.ToLower().startswith($startingChar.ToLower())) {
                 $noResults = $false
                 write-host $var.name = $var.value
             }
