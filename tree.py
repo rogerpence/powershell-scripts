@@ -1,7 +1,7 @@
-# Lifted, with only minor modifications, from Doug Dahms' work on StackOverflow. 
+# Lifted, with only minor modifications, from Doug Dahms' work on StackOverflow.
 # https://stackoverflow.com/questions/9727673/list-directory-tree-structure-in-python
 
-# The major modification I made was to allow excluded directories. 
+# The major modification I made was to allow excluded directories.
 
 from os import listdir, sep
 from os.path import abspath, basename, isdir
@@ -23,17 +23,18 @@ excluded_dirs = [r'\node_modules', r'\.git', r'\site-packages', r'\env',]
 def is_dir_included(dir):
     for excluded_dir in excluded_dirs:
         if dir.endswith(excluded_dir):
-            return False 
-    return True         
+            return False
+    return True
 
-def tree(dir, padding, print_files=False, isLast=False, isFirst=False):
+def tree(dir, padding, print_files=False, isLast=False, isFirst=False, dir_symbol=''):
+    print(dir_symbol)
     if isFirst:
         print(padding[:-1] + dir)
     else:
         if isLast:
-            print(padding[:-1] + LEFT_EL + basename(abspath(dir)))
+            print(padding[:-1] + LEFT_EL +  dir_symbol + basename(abspath(dir)))
         else:
-            print(padding[:-1] + LEFT_TEE + basename(abspath(dir)))
+            print(padding[:-1] + LEFT_TEE +  dir_symbol + basename(abspath(dir)))
     files = []
     if print_files:
         files = listdir(dir)
@@ -49,20 +50,25 @@ def tree(dir, padding, print_files=False, isLast=False, isFirst=False):
         path = dir + sep + file
         isLast = i == last
 
-        #if isdir(path) and path not in excluded_dirs: 
-        if isdir(path) and is_dir_included(path): 
+        if isdir(file):
+            is_dir = dir_symbol
+        else:
+            is_dir = ''
+
+        #if isdir(path) and path not in excluded_dirs:
+        if isdir(path) and is_dir_included(path):
             if count == len(files):
                 if isFirst:
-                    tree(path, padding, print_files, isLast, False)
+                    tree(path, padding, print_files, isLast, False, dir_symbol)
                 else:
-                    tree(path, padding + ' ', print_files, isLast, False)
+                    tree(path, padding + ' ', print_files, isLast, False, dir_symbol)
             else:
-                tree(path, padding + PIPE, print_files, isLast, False)
+                tree(path, padding + PIPE, print_files, isLast, False, dir_symbol)
         else:
             if isLast:
-                print(padding + LEFT_EL + file)
+                print(padding + LEFT_EL + is_dir + file)
             else:
-                print(padding + LEFT_TEE + file)
+                print(padding + LEFT_TEE + is_dir + file)
 
 def usage():
     return '''Usage: %s [-f]
@@ -72,6 +78,8 @@ Options:
 PATH    Path to process''' % basename(argv[0])
 
 def main():
+    dir_symbol = u'\u2630'
+
     if len(argv) == 1:
         print(usage())
     elif len(argv) == 2:
@@ -82,10 +90,11 @@ def main():
         else:
             print('ERROR: \'' + path + '\' is not a directory')
     elif len(argv) == 3 and argv[1] == '-f':
+        dir_symbol = u'\u2630'
         # print directories and files
         path = argv[2]
         if isdir(path):
-            tree(path, '', True, False, True)
+            tree(path, '', True, False, True, dir_symbol)
         else:
             print('ERROR: \'' + path + '\' is not a directory')
     else:
