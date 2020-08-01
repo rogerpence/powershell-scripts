@@ -28,17 +28,29 @@ This mostly a collection of Powershell command with a few other miscellaneous co
 
     `dl runserver -port:5500`
 
-* get-gitignore.ps1
+* git-clone-branch.ps1
 
-    Get my .gitignore file
+    Hmmm. Investigate this
 
 * get-http-file.ps1
 
     A start at downloading a specified file
 
-* git-clone-branch.ps1
+* get-gitignore.ps1
 
-    Hmmm. Investigate this
+    Get my .gitignore file
+
+* git-init.ps1
+
+    Initialize Git and fetch my .gitignore
+
+    Example:
+
+    `git init`
+
+    or
+
+    `git init -force` to reinitialize Git
 
 * go.ps1
 

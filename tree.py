@@ -27,7 +27,6 @@ def is_dir_included(dir):
     return True
 
 def tree(dir, padding, print_files=False, isLast=False, isFirst=False, dir_symbol=''):
-    print(dir_symbol)
     if isFirst:
         print(padding[:-1] + dir)
     else:
